@@ -19,4 +19,3 @@ class Electricity_consume:
 
     def monthly_carbon_footprint(self):
         return round(self.monthly_consumption() * 0.177, 3)
-

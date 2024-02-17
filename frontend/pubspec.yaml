@@ -39,6 +39,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   google_fonts: ^6.1.0
   syncfusion_flutter_gauges: ^24.2.6
+  syncfusion_flutter_charts: ^24.2.6
 
 dev_dependencies:
   flutter_test:

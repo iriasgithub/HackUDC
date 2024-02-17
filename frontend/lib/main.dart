@@ -1,6 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            String voltCare = "VoltCare"; // Nombre App
             double currPrice = double.parse(model.actualPrice);
             // current temperature
             double maxPrice =
@@ -66,9 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
             double avgPrice =
                 double.parse(model.avgPrice); //precio medio del dia
             String expectedCost =
-                (double.parse(model.consumptionLastMonth) * currPrice).toStringAsFixed(3);
+                (double.parse(model.consumptionLastMonth) * currPrice)
+                    .toStringAsFixed(3);
             List hourPrices = model.hourPrices;
             double carbonFootprint = model.carbonFootprint;
+
             Size size = MediaQuery.of(context).size;
             return Center(
               child: Container(
@@ -86,34 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //BARRA SUPERIOR
-                            /*
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                vertical: size.height * 0.04,
-                                horizontal: size.width * 0.06,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // ICONO TRES LINEAS, DESPLEGABLE
-                                  FaIcon(
-                                    FontAwesomeIcons.bars,
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                  /*FaIcon(
-                                    FontAwesomeIcons.plusCircle,
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),*/
-                                ],
-                              ),
-                            ),
-                            */
                             //--------------------------
                             //ELEMENTOS BLOQUE GRANDE + DERECHO
 
@@ -137,17 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                             left: size.width * 0.05,
                                           ),
                                           child: Align(
-                                            child: Image.asset("assets/VoltCare.JPG", width: 180, height: 90 )/*Text(
-                                              voltCare,
-                                              style: GoogleFonts.questrial(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontSize: size.height * 0.06,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),*/
-                                          ),
+                                              child: Image.asset(
+                                                  "assets/VoltCare.JPG",
+                                                  width: 180,
+                                                  height: 90)),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
@@ -202,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                           ),
                                         ),
-                                        
+
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
@@ -273,23 +238,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             right: size.width * 0.03,
-                                            top: size.height * 0.15, 
+                                            top: size.height * 0.15,
                                           ),
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.all(
+                                              borderRadius:
+                                                  const BorderRadius.all(
                                                 Radius.circular(10),
                                               ),
                                               color: isDarkMode
-                                                  ? Colors.white.withOpacity(0.05)
-                                                  : Colors.black.withOpacity(0.05),
+                                                  ? Colors.white
+                                                      .withOpacity(0.05)
+                                                  : Colors.black
+                                                      .withOpacity(0.05),
                                             ),
                                             child: Column(
                                               children: [
                                                 //hijos recuadro tip
 
                                                 Align(
-                                                  alignment: Alignment.centerLeft,
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                       top: size.height * 0.01,
@@ -298,34 +267,41 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     child: Text(
                                                       'Daily tip:',
-                                                      style: GoogleFonts.questrial(
+                                                      style:
+                                                          GoogleFonts.questrial(
                                                         color: isDarkMode
                                                             ? Colors.white
                                                             : Colors.black,
-                                                        fontSize: size.height * 0.025,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontSize:
+                                                            size.height * 0.025,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                                 Align(
-                                                  alignment: Alignment.centerLeft,
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
-                                                      top: size.height * 0.01,
-                                                      left: size.width * 0.03,
-                                                      right: size.width * 0.03,
-                                                      bottom: size.height * 0.03
-                                                    ),
+                                                        top: size.height * 0.01,
+                                                        left: size.width * 0.03,
+                                                        right:
+                                                            size.width * 0.03,
+                                                        bottom:
+                                                            size.height * 0.03),
                                                     child: Text(
                                                       currPrice <= avgPrice
-                                                    ? "Look! Lower price\nthan daily\naverage: $avgPrice€"
-                                                    : "Careful with \nexceed consume.\nToday average\nis $avgPrice€" ,
-                                                      style: GoogleFonts.questrial(
+                                                          ? "Look! Lower price\nthan daily\naverage: $avgPrice€"
+                                                          : "Careful with \nexceed consume.\nToday's average\nis $avgPrice€",
+                                                      style:
+                                                          GoogleFonts.questrial(
                                                         color: isDarkMode
                                                             ? Colors.white
                                                             : Colors.black,
-                                                        fontSize: size.height * 0.02,
+                                                        fontSize:
+                                                            size.height * 0.02,
                                                       ),
                                                     ),
                                                   ),
@@ -335,39 +311,38 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ),
                                         Padding(
-                                        padding: EdgeInsets.only(
-                                          top: size.height * 0.01,
-                                          left: size.width * 0.06,
-                                        ),
-                                        child: Text(
-                                          'Expected\nexpenditure:',
-                                          style: GoogleFonts.questrial(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontSize: size.height * 0.023,
-                                            fontWeight: FontWeight.bold,
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.01,
+                                            left: size.width * 0.06,
                                           ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          left: size.width * 0.06,
-                                        ),
-                                        child: Align(
                                           child: Text(
-                                            '$expectedCost€\n', 
+                                            'Expected\nexpenditure:',
                                             style: GoogleFonts.questrial(
                                               color: isDarkMode
-                                                  ? Colors.white54
-                                                  : Colors.black54,
-                                              fontSize: size.height * 0.03,
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: size.height * 0.023,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ]
-                                  ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            left: size.width * 0.06,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              '$expectedCost€\n',
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white54
+                                                    : Colors.black54,
+                                                fontSize: size.height * 0.03,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
                                 ],
                               ),
                             ),
@@ -413,22 +388,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                       padding:
                                           EdgeInsets.all(size.width * 0.005),
                                       child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          children: List.generate(24, (index) {
-                                            String price = hourPrices[index]; // Obtener el precio de la lista
-                                            String startTime = "${index.toString().padLeft(2, '0')}:00"; // Hora de inicio
-                                            String endTime = "${(index + 1).toString().padLeft(2, '0')}:00"; // Hora de fin
-                                            return buildHourRange(
-                                              price, 
-                                              startTime, 
-                                              endTime, 
-                                              size, 
-                                              isDarkMode,
-                                            );
-                                          }),
-                                        )
-                                      ),
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children:
+                                                List.generate(24, (index) {
+                                              double price = double.parse(
+                                                  hourPrices[
+                                                      index]); // Obtener el precio de la lista
+                                              String startTime =
+                                                  "${index.toString().padLeft(2, '0')}:00"; // Hora de inicio
+                                              String endTime =
+                                                  "${(index + 1).toString().padLeft(2, '0')}:00"; // Hora de fin
+                                              return buildHourRange(
+                                                  price,
+                                                  startTime,
+                                                  endTime,
+                                                  size,
+                                                  isDarkMode,
+                                                  cotaInf,
+                                                  cotaSup);
+                                            }),
+                                          )),
                                     ),
                                   ],
                                 ),
@@ -456,7 +436,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           left: size.width * 0.03,
                                         ),
                                         child: Text(
-                                          'Data Information',
+                                          'Monthly carbon fingerprinting',
                                           style: GoogleFonts.questrial(
                                             color: isDarkMode
                                                 ? Colors.white
@@ -477,52 +457,94 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.all(size.width * 0.005),
+                              padding: EdgeInsets.all(size.width * 0.005),
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children:[
-                                    Container(
-                                      height: 120,
-                                      width: 100,
-                                      child: SfRadialGauge(
-                                        enableLoadingAnimation: true, animationDuration: 6000,
-                                        axes: <RadialAxis>[
-                                          RadialAxis(minimum: 0, maximum: 120, radiusFactor: 1.3, 
-                                          maximumLabels: 2, showLastLabel: true, axisLineStyle:  AxisLineStyle(
-                                            thickness: 15),
-                                            pointers: <GaugePointer> [NeedlePointer(value: carbonFootprint,
-                                            needleStartWidth: 0.5, needleEndWidth: 5,)],
-                                          centerY: 0.55, centerX: 0.9,
-                                          ranges: <GaugeRange>[
-                                            GaugeRange(startValue: 0, endValue: 40, color: Color.fromARGB(255, 10, 196, 94), startWidth: 10,endWidth: 10),
-                                            GaugeRange(startValue: 40, endValue: 80, color: Color.fromARGB(255, 254, 200, 3), startWidth: 10,endWidth: 10),
-                                            GaugeRange(startValue: 80, endValue: 120, color: Colors.pink, startWidth: 10,endWidth: 10)
-                                            ],
-                                          ),
-                                        ],
-                                      )
-                                    ),
-                                  Expanded(child:
-                                    Column(
-                                      children: [
-                                        SizedBox(height: 50,),                                     
-                                        
-                                        Text(
-                                        'texto añadido',
-                                        style: GoogleFonts.questrial(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontSize: size.height * 0.023,
-                                          fontWeight: FontWeight.bold,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SizedBox(
+                                        height: 120,
+                                        width: 100,
+                                        child: SfRadialGauge(
+                                          enableLoadingAnimation: true,
+                                          animationDuration: 6000,
+                                          axes: <RadialAxis>[
+                                            RadialAxis(
+                                              minimum: 0,
+                                              maximum: 120,
+                                              radiusFactor: 1.5,
+                                              maximumLabels: 5,
+                                              showLastLabel: true,
+                                              axisLineStyle:
+                                                  const AxisLineStyle(
+                                                      thickness: 15),
+                                              pointers: <GaugePointer>[
+                                                NeedlePointer(
+                                                  value: carbonFootprint,
+                                                  needleStartWidth: 0.5,
+                                                  needleEndWidth: 5,
+                                                )
+                                              ],
+                                              centerY: 0.55,
+                                              centerX: 0.9,
+                                              ranges: <GaugeRange>[
+                                                GaugeRange(
+                                                    startValue: 0,
+                                                    endValue: 40,
+                                                    color: Color.fromARGB(
+                                                        255, 10, 196, 94),
+                                                    startWidth: 10,
+                                                    endWidth: 10),
+                                                GaugeRange(
+                                                    startValue: 40,
+                                                    endValue: 80,
+                                                    color: Color.fromARGB(
+                                                        255, 254, 200, 3),
+                                                    startWidth: 10,
+                                                    endWidth: 10),
+                                                GaugeRange(
+                                                    startValue: 80,
+                                                    endValue: 120,
+                                                    color: Colors.pink,
+                                                    startWidth: 10,
+                                                    endWidth: 10)
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    Expanded(
+                                      child: Column(children: [
+                                        const SizedBox(
+                                          height: 5,
                                         ),
-                                      ),]
-                                    ),)
-                                ]
-                              ),
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              top: size.height * 0.01,
+                                              right: size.width * 0.08,
+                                            ),
+                                            child: Text(
+                                              textAlign: TextAlign.justify,
+                                              carbonFootprint <= 40
+                                                  ? "Outstanding! You're\nlighting the path\nto a greener\nfuture. 🌟"
+                                                  : carbonFootprint > 40 &&
+                                                          carbonFootprint <= 80
+                                                      ? "Steady! Keep\nheading towards\nsustainability. 💡"
+                                                      : "Time to turn the\ntide! Let's make a\nchange for a\nbetter world. 🌍",
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: size.height * 0.023,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                    )
+                                  ]),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -542,15 +564,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                       alignment: Alignment.centerLeft,
                                       child: Padding(
                                         padding: EdgeInsets.only(
-                                          top: size.height * 0.02,
+                                          top: size.height * 0.01,
                                           left: size.width * 0.03,
                                         ),
                                         child: Text(
-                                          'Information 2',
+                                          '',
                                           style: GoogleFonts.questrial(
                                             color: isDarkMode
                                                 ? Colors.white
-                                                : Colors.black,
+                                                : Color.fromARGB(
+                                                    255, 66, 66, 66),
                                             fontSize: size.height * 0.025,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -566,7 +589,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                             ),
-                          ],     
+                          ],
                         ),
                       ),
                     ],
@@ -580,8 +603,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildHourRange(
-      String price, String hini, String hfin, size, bool isDarkMode) {
+  Widget buildHourRange(double price, String hini, String hfin, size,
+      bool isDarkMode, double cotaInf, double cotaSup) {
     return Padding(
       padding: EdgeInsets.all(size.width * 0.025),
       child: Column(
@@ -589,7 +612,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Text(
             '$price€',
             style: GoogleFonts.questrial(
-              color: isDarkMode ? Colors.white : Colors.black,
+              color: price <= cotaInf
+                  ? Color.fromARGB(255, 10, 196, 94)
+                  : price > cotaInf && price <= cotaSup
+                      ? Colors.indigo
+                      : Colors.pink,
               fontSize: size.height * 0.025,
             ),
           ),

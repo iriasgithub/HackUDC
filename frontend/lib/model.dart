@@ -13,8 +13,8 @@ class Model extends ChangeNotifier {
   late String avgPrice;
   late String consumptionLastMonth;
   late double carbonFootprint;
-  late Future<void> updateData;
 
+  late Future<void> updateData;
 
   Model() {
     updateData = _updateData();
@@ -37,8 +37,8 @@ class Model extends ChangeNotifier {
 
   Future<void> _updateData() async {
     var uri = Uri(
-      scheme: 'http', 
-      host: '10.20.36.108', 
+      scheme: 'http',
+      host: '10.20.36.108',
       port: 8080,
       path: "/basicdata",
     );
@@ -54,6 +54,7 @@ class Model extends ChangeNotifier {
       avgPrice = dataAsDartMap["avg_price"];
       carbonFootprint = dataAsDartMap["monthly_carbon_footprint"];
 
+
       DateTime now = DateTime.now();
       int index = now.hour;
       consumptionLastMonth = dataAsDartMap["consumption_list"][index];
@@ -62,7 +63,5 @@ class Model extends ChangeNotifier {
 
       notifyListeners();
     }
-    
   }
-
 }

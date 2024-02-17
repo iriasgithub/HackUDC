@@ -14,7 +14,7 @@ def basic_data():
             "min_price": min_max["min"],
             "avg_price": electricity.avg_price(),
             "consumption_list": consume.hour_consumption_avg(),
-            "monthly_carbon_footprint": consume.monthly_carbon_footprint()
+            "monthly_carbon_footprint": consume.monthly_carbon_footprint(),
             }
 
 
