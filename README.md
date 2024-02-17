@@ -40,7 +40,15 @@ Para poner en marcha VoltCare será necesario inicar el servidor Python HTTP med
 python3 server.py
 ```
 Luego se ejecutará la aplicación móvil de Flutter que empezará a enviar peticiones a nuestro servidor.
+## Licencia
 
+## Opciones de mejora
+Ampliacón de funcionalidades tales como:
+- El usuario tendrá la posibilidad de introducir un gasto deseado por mes y el sistema le proporcionará recomendaciones sobre cuándo usar determinados electrodomésticos, dependiendo del tiempo de duración de la tarea y de las horas más caras de energía eléctrica.
+- Comparación con datos de viviendas geofráficamente cercanas.
+- Índice de eficiencia energética personalizada para el usuario dependiendo de las etiquetas de sus electrodomésticos.
+- Recomendaciones sobre el uso de energías renovables.
+En cuanto al Backend, se pretende desarrollar uno más completo que permita al usuario introducir la información sobre sus facturas.
 ## Autoría
 Usuarios de GitHub - Correos UDC
 pablodiazcoira - pablo.coira@udc.es
