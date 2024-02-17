@@ -11,6 +11,10 @@ Las principales funcionalidades que nos ofrece la aplicación son las siguientes
  - Previsión del gasto total en € en el intervalo horario actual basado en datos anteriores.
  - Consejos diarios sobre cuándo escatimar más en el uso de la energía.
  - Cálculo de la huella de carbono de una determinada vivienda y comparación en base a la media española.
+## Dependencias
+**VoltCare** está disponible para su uso en sistemas operativos Android e IOS.
+## Multimedia
+
 ## Tecnologías 
 El desarollo Frontend de VoltCare está exclusivamente desarollado en lenguaje dart, haciendo uso de la librería Flutter. Por otro lado, la parte referida al Backend emplea fundamentalmente Python y la librería Pandas para el análisis de datos.
 ## Backend
