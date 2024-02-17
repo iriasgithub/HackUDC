@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -117,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                             Padding(
                               padding: EdgeInsets.only(
-                                top: size.height * 0.005,
+                                top: size.height * 0.000001,
                                 bottom: size.height * 0.01,
                               ),
                               child: Row(
@@ -131,11 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                         //VOLTCARE
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            top: size.height * 0.03,
-                                            left: size.width * 0.005,
+                                            top: size.height * 0.01,
+                                            left: size.width * 0.05,
                                           ),
                                           child: Align(
-                                            child: Text(
+                                            child: Image.asset("assets/VoltCare.JPG", width: 180, height: 90 )/*Text(
                                               voltCare,
                                               style: GoogleFonts.questrial(
                                                 color: isDarkMode
@@ -144,13 +145,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 fontSize: size.height * 0.06,
                                                 fontWeight: FontWeight.bold,
                                               ),
-                                            ),
+                                            ),*/
                                           ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -167,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -188,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -204,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -219,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -234,7 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -249,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.05,
+                                            left: size.width * 0.08,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -270,8 +271,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         //recuadro tip
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            right: size.width * 0.02,
-                                            top: size.height * 0.11, 
+                                            right: size.width * 0.03,
+                                            top: size.height * 0.15, 
                                           ),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -295,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       right: size.width * 0.03,
                                                     ),
                                                     child: Text(
-                                                      'Tip for today:',
+                                                      'Daily tip:',
                                                       style: GoogleFonts.questrial(
                                                         color: isDarkMode
                                                             ? Colors.white
@@ -318,7 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     child: Text(
                                                       currPrice <= avgPrice
                                                     ? "Look! Lower price\nthan daily\naverage: $avgPrice€"
-                                                    : "Careful with exceed\nconsume. Today\naverage is $avgPrice" ,
+                                                    : "Careful with \nexceed\nconsume. Today\naverage \nis $avgPrice" ,
                                                       style: GoogleFonts.questrial(
                                                         color: isDarkMode
                                                             ? Colors.white
@@ -478,22 +479,23 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding:
                                   EdgeInsets.all(size.width * 0.005),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
                                 children:[
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: size.width * 0.00001,
-                                      top: size.height * 0.00001,
-                                    ),
-                                    child: Container(
+
+                                    Container(
+                                      height: 100,
+                                      width: 100,
                                       child: SfRadialGauge(
                                         enableLoadingAnimation: true, animationDuration: 6000,
                                         axes: <RadialAxis>[
-                                          RadialAxis(minimum: 0, maximum: 120, radiusFactor: 0.5, 
+                                          RadialAxis(minimum: 0, maximum: 120, radiusFactor: 1.3, 
                                           maximumLabels: 2, showLastLabel: true, axisLineStyle:  AxisLineStyle(
                                             thickness: 15),
                                             pointers: <GaugePointer> [NeedlePointer(value: model.carbonFootprint,
                                             needleStartWidth: 0.5, needleEndWidth: 5,)],
-                                          centerY: 0.5, centerX: 0.5,
+                                          centerY: 0.2, centerX: 0.5,
                                           ranges: <GaugeRange>[
                                             GaugeRange(startValue: 0, endValue: 40, color: Color.fromARGB(255, 10, 196, 94), startWidth: 10,endWidth: 10),
                                             GaugeRange(startValue: 40, endValue: 80, color: Color.fromARGB(255, 254, 200, 3), startWidth: 10,endWidth: 10),
@@ -502,28 +504,32 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ],
                                       )
-                                    )
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: size.height * 0.01,
-                                      vertical: size.width * 0.06,
                                     ),
-                                    child: Text(
-                                      'texto añadido',
-                                      style: GoogleFonts.questrial(
-                                        color: isDarkMode
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontSize: size.height * 0.023,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
+                                  Expanded(child:
+                                    Column(
+                                      children: [
+                                        SizedBox(height: 50,),                                     
+                                        
+                                        Text(
+                                        'texto añadido',
+                                        style: GoogleFonts.questrial(
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontSize: size.height * 0.023,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),]
+                                    ),)
                                 ]
                               ),
                             ),
-                          ],
+                            Divider(
+                              color: isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ],     
                         ),
                       ),
                     ],

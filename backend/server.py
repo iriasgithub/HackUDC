@@ -44,7 +44,7 @@ class Handler(BaseHTTPRequestHandler):
 
 # Configurar y ejecutar el servidor
 puerto = 8080
-direccion_servidor = ('', puerto)
+direccion_servidor = ('10.20.36.108', puerto)
 
 try:
     with HTTPServer(direccion_servidor, Handler) as servidor:
