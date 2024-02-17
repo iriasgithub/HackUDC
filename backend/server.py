@@ -1,9 +1,11 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from precio_electricidad import *
+from consumo_electricidad import *
 
 
 electricity = Electricity_price()
+consume = Electricity_consume()
 
 def funcion_1():
     min_max = electricity.get_min_max_price()
@@ -11,7 +13,7 @@ def funcion_1():
             "max_price": min_max["max"],
             "min_price": min_max["min"],
             "avg_price": electricity.avg_price(),
-            "consumption_list": []}
+            "consumption_list": consume.hour_consumption_avg()}
 
 def funcion_2():
     return {"mensaje": "Llamada a la función 2"}
