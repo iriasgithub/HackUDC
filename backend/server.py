@@ -13,14 +13,14 @@ def basic_data():
             "max_price": min_max["max"],
             "min_price": min_max["min"],
             "avg_price": electricity.avg_price(),
-            "consumption_list": consume.hour_consumption_avg()}
+            "consumption_list": consume.hour_consumption_avg(),
+            "monthly_carbon_footprint": consume.monthly_carbon_footprint()
+            }
 
-def carbon_footprint():
-    return {"monthly_carbon_footprint": consume.monthly_carbon_footprint()}
+
 
 rutas = {
-    "/basicdata": basic_data,
-    "/carbonfootprint": carbon_footprint,
+    "/basicdata": basic_data
 }
 
 

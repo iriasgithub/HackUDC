@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:voltcare/model.dart';
@@ -471,6 +472,55 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                   ],
                                 ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsets.all(size.width * 0.005),
+                              child: Row(
+                                children:[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: size.width * 0.00001,
+                                      top: size.height * 0.00001,
+                                    ),
+                                    child: Container(
+                                      child: SfRadialGauge(
+                                        enableLoadingAnimation: true, animationDuration: 6000,
+                                        axes: <RadialAxis>[
+                                          RadialAxis(minimum: 0, maximum: 120, radiusFactor: 0.5, 
+                                          maximumLabels: 2, showLastLabel: true, axisLineStyle:  AxisLineStyle(
+                                            thickness: 15),
+                                            pointers: <GaugePointer> [NeedlePointer(value: model.carbonFootprint,
+                                            needleStartWidth: 0.5, needleEndWidth: 5,)],
+                                          centerY: 0.5, centerX: 0.5,
+                                          ranges: <GaugeRange>[
+                                            GaugeRange(startValue: 0, endValue: 40, color: Color.fromARGB(255, 10, 196, 94), startWidth: 10,endWidth: 10),
+                                            GaugeRange(startValue: 40, endValue: 80, color: Color.fromARGB(255, 254, 200, 3), startWidth: 10,endWidth: 10),
+                                            GaugeRange(startValue: 80, endValue: 120, color: Colors.pink, startWidth: 10,endWidth: 10)
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    )
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: size.height * 0.01,
+                                      vertical: size.width * 0.06,
+                                    ),
+                                    child: Text(
+                                      'texto añadido',
+                                      style: GoogleFonts.questrial(
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: size.height * 0.023,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ]
                               ),
                             ),
                           ],

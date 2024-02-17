@@ -12,6 +12,7 @@ class Model extends ChangeNotifier {
   late String minHourRange;
   late String avgPrice;
   late String consumptionLastMonth;
+  late double carbonFootprint;
   late Future<void> updateData;
 
 
@@ -51,6 +52,7 @@ class Model extends ChangeNotifier {
       minHourPrice = dataAsDartMap["min_price"]["price"];
       minHourRange = dataAsDartMap["min_price"]["range"];
       avgPrice = dataAsDartMap["avg_price"];
+      carbonFootprint = dataAsDartMap["monthly_carbon_footprint"];
 
       DateTime now = DateTime.now();
       int index = now.hour;
