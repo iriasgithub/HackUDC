@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:gradiant/model.dart';
+import 'package:voltcare/model.dart';
 
 void main() {
   runApp(
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             Align(
                               child: Text(
-                                'Weather App', //TODO: change app name
+                                'VoltCare', //TODO: change app name
                                 style: GoogleFonts.questrial(
                                   color: isDarkMode
                                       ? Colors.white
