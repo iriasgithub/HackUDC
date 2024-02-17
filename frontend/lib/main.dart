@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             String expectedCost =
                 (double.parse(model.consumptionLastMonth) * currPrice).toStringAsFixed(3);
             List hourPrices = model.hourPrices;
+            double carbonFootprint = model.carbonFootprint;
             Size size = MediaQuery.of(context).size;
             return Center(
               child: Container(
@@ -319,7 +320,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     child: Text(
                                                       currPrice <= avgPrice
                                                     ? "Look! Lower price\nthan daily\naverage: $avgPrice€"
-                                                    : "Careful with \nexceed\nconsume. Today\naverage \nis $avgPrice" ,
+                                                    : "Careful with \nexceed consume.\nToday average\nis $avgPrice€" ,
                                                       style: GoogleFonts.questrial(
                                                         color: isDarkMode
                                                             ? Colors.white
@@ -483,9 +484,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children:[
-
                                     Container(
-                                      height: 100,
+                                      height: 120,
                                       width: 100,
                                       child: SfRadialGauge(
                                         enableLoadingAnimation: true, animationDuration: 6000,
@@ -493,9 +493,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                           RadialAxis(minimum: 0, maximum: 120, radiusFactor: 1.3, 
                                           maximumLabels: 2, showLastLabel: true, axisLineStyle:  AxisLineStyle(
                                             thickness: 15),
-                                            pointers: <GaugePointer> [NeedlePointer(value: model.carbonFootprint,
+                                            pointers: <GaugePointer> [NeedlePointer(value: carbonFootprint,
                                             needleStartWidth: 0.5, needleEndWidth: 5,)],
-                                          centerY: 0.2, centerX: 0.5,
+                                          centerY: 0.55, centerX: 0.9,
                                           ranges: <GaugeRange>[
                                             GaugeRange(startValue: 0, endValue: 40, color: Color.fromARGB(255, 10, 196, 94), startWidth: 10,endWidth: 10),
                                             GaugeRange(startValue: 40, endValue: 80, color: Color.fromARGB(255, 254, 200, 3), startWidth: 10,endWidth: 10),
@@ -524,10 +524,47 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ]
                               ),
                             ),
-                            Divider(
-                              color: isDarkMode
-                                  ? Colors.white
-                                  : Colors.black,
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.05,
+                                vertical: size.height * 0.02,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Colors.white.withOpacity(0.05),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          top: size.height * 0.02,
+                                          left: size.width * 0.03,
+                                        ),
+                                        child: Text(
+                                          'Information 2',
+                                          style: GoogleFonts.questrial(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: size.height * 0.025,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ],     
                         ),
