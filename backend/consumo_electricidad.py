@@ -12,5 +12,11 @@ class Electricity_consume:
             avg_list.append(str(round(avg, 3)))
         return avg_list
 
+    def monthly_consumption(self):
+        return round(self.df[(self.df["Código universal de punto de suministro"] == 0) 
+                & (self.df['datetime'] >= '2023-01-01') 
+                & (self.df['datetime'] <= '2023-01-31')]["Consumo"].sum(), 3)
 
+    def monthly_carbon_footprint(self):
+        return round(self.monthly_consumption() * 0.177, 3)
 

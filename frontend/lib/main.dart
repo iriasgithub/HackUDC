@@ -49,14 +49,23 @@ class _MyHomePageState extends State<MyHomePage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-          
-            String voltCare = "VoltCare"; //city name
-            double currPrice = 0.5; // current temperature
-            double maxPrice = 0.86; // today max temperature
-            double minPrice = 0.35; // today min temperature
-            String avgPrice = "0.67"; //precio medio del dia
-            String calcDerecha = "0.56"; 
-            
+            String voltCare = "VoltCare"; // Nombre App
+            double currPrice = double.parse(model.actualPrice);
+            // current temperature
+            double maxPrice =
+                double.parse(model.maxHourPrice); // today max temperature
+            double minPrice =
+                double.parse(model.minHourPrice); // today min temperature
+            String hoursMinPrice = model.minHourRange;
+            String hoursMaxPrice = model.maxHourRange;
+            double med = (maxPrice - minPrice) / 3;
+            double cotaInf = minPrice + med;
+            double cotaSup = cotaInf + med;
+            double avgPrice =
+                double.parse(model.avgPrice); //precio medio del dia
+            String expectedCost =
+                (double.parse(model.consumptionLastMonth) * currPrice).toStringAsFixed(3);
+            List hourPrices = model.hourPrices;
             Size size = MediaQuery.of(context).size;
             return Center(
               child: Container(
@@ -70,38 +79,44 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       SingleChildScrollView(
                         //COLUMNA PRINCIPAL
-      
+
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //BARRA SUPERIOR
-      
+                            /*
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 vertical: size.height * 0.04,
                                 horizontal: size.width * 0.06,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  // ICONO TRES LINEAS, DESPLEGABLE
                                   FaIcon(
                                     FontAwesomeIcons.bars,
-                                    color: isDarkMode ? Colors.white : Colors.black,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
-                                  FaIcon(
+                                  /*FaIcon(
                                     FontAwesomeIcons.plusCircle,
-                                    color: isDarkMode ? Colors.white : Colors.black,
-                                  ),
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),*/
                                 ],
                               ),
                             ),
-      
+                            */
                             //--------------------------
                             //ELEMENTOS BLOQUE GRANDE + DERECHO
-      
+
                             Padding(
                               padding: EdgeInsets.only(
-                                top: size.height * 0.03,
+                                top: size.height * 0.005,
                                 bottom: size.height * 0.01,
                               ),
                               child: Row(
@@ -109,12 +124,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   //elemento izquierda
                                   Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        //VOLTCARE
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.03,
-                                            left: size.width * 0.08,
+                                            left: size.width * 0.005,
                                           ),
                                           child: Align(
                                             child: Text(
@@ -132,11 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.08,
+                                            left: size.width * 0.05,
                                           ),
                                           child: Align(
                                             child: Text(
-                                              'Now', //day
+                                              'Plot price', //Precio actual
                                               style: GoogleFonts.questrial(
                                                 color: isDarkMode
                                                     ? Colors.white54
@@ -148,167 +165,213 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            top: size.height * 0.03,
-                                            left: size.width * 0.08,
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.05,
                                           ),
                                           child: Align(
                                             child: Text(
-                                              '$currPrice€', //curent price
+                                              '$currPrice€', //current price
                                               style: GoogleFonts.questrial(
-                                                color: currPrice <= 0
-                                                    ? Colors.blue
-                                                    : currPrice > 0 && currPrice <= 15
+                                                color: currPrice <= cotaInf
+                                                    ? Color.fromARGB(
+                                                        255, 10, 196, 94)
+                                                    : currPrice > cotaInf &&
+                                                            currPrice <= cotaSup
                                                         ? Colors.indigo
-                                                        : currPrice > 15 &&
-                                                                currPrice < 30
-                                                            ? Colors.deepPurple
-                                                            : Colors.pink,
-                                                fontSize: size.height * 0.13,
+                                                        : Colors.pink,
+                                                fontSize: size.height * 0.05,
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: size.width * 0.25),
-                                          child: Divider(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
                                           ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
                                             top: size.height * 0.005,
-                                            left: size.width * 0.08,
+                                            left: size.width * 0.05,
                                           ),
                                           child: Align(
                                             child: Text(
-                                              'Average price: $avgPrice€', // precio medio
+                                              'kWh',
                                               style: GoogleFonts.questrial(
-                                                color: isDarkMode
-                                                    ? Colors.white54
-                                                    : Colors.black54,
+                                                color: Colors.grey,
                                                 fontSize: size.height * 0.03,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.05,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'Min: $minPrice€',
+                                              style: GoogleFonts.questrial(
+                                                color: Colors.indigo,
+                                                fontSize: size.height * 0.028,
                                               ),
                                             ),
                                           ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            top: size.height * 0.03,
-                                            bottom: size.height * 0.03,
-                                            left: size.width * 0.08,
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.05,
                                           ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                'min $minPrice€', // min temperature
-                                                style: GoogleFonts.questrial(
-                                                  color: minPrice <= 0
-                                                      ? Colors.blue
-                                                      : minPrice > 0 && minPrice <= 15
-                                                          ? Colors.indigo
-                                                          : minPrice > 15 &&
-                                                                  minPrice < 30
-                                                              ? Colors.deepPurple
-                                                              : Colors.pink,
-                                                  fontSize: size.height * 0.03,
-                                                ),
+                                          child: Align(
+                                            child: Text(
+                                              'at $hoursMinPrice',
+                                              style: GoogleFonts.questrial(
+                                                color: Colors.indigo,
+                                                fontSize: size.height * 0.019,
                                               ),
-                                              Text(
-                                                '/',
-                                                style: GoogleFonts.questrial(
-                                                  color: isDarkMode
-                                                      ? Colors.white54
-                                                      : Colors.black54,
-                                                  fontSize: size.height * 0.03,
-                                                ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.05,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'Max: $maxPrice€',
+                                              style: GoogleFonts.questrial(
+                                                color: Colors.indigo,
+                                                fontSize: size.height * 0.028,
                                               ),
-                                              Text(
-                                                'max $maxPrice€', //max temperature
-                                                style: GoogleFonts.questrial(
-                                                  color: maxPrice <= 0
-                                                      ? Colors.blue
-                                                      : maxPrice > 0 && maxPrice <= 15
-                                                          ? Colors.indigo
-                                                          : maxPrice > 15 &&
-                                                                  maxPrice < 30
-                                                              ? Colors.deepPurple
-                                                              : Colors.pink,
-                                                  fontSize: size.height * 0.03,
-                                                ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.05,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'at $hoursMaxPrice\n',
+                                              style: GoogleFonts.questrial(
+                                                color: Colors.indigo,
+                                                fontSize: size.height * 0.019,
                                               ),
-                                            ],
+                                            ),
                                           ),
                                         ),
                                       ]),
                                   //elemento derecha
                                   Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        //recuadro tip
                                         Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.05,
+                                          padding: EdgeInsets.only(
+                                            right: size.width * 0.02,
+                                            top: size.height * 0.11, 
                                           ),
-                                          child: Align(
-                                            child: Text(
-                                              'Higher than average\nmonthly price', // weather
-                                              style: GoogleFonts.questrial(
-                                                color: isDarkMode
-                                                    ? Colors.white54
-                                                    : Colors.black54,
-                                                fontSize: size.height * 0.03,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: const BorderRadius.all(
+                                                Radius.circular(10),
                                               ),
+                                              color: isDarkMode
+                                                  ? Colors.white.withOpacity(0.05)
+                                                  : Colors.black.withOpacity(0.05),
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                //hijos recuadro tip
+
+                                                Align(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      top: size.height * 0.01,
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                    ),
+                                                    child: Text(
+                                                      'Tip for today:',
+                                                      style: GoogleFonts.questrial(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: size.height * 0.025,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      top: size.height * 0.01,
+                                                      left: size.width * 0.03,
+                                                      right: size.width * 0.03,
+                                                      bottom: size.height * 0.03
+                                                    ),
+                                                    child: Text(
+                                                      currPrice <= avgPrice
+                                                    ? "Look! Lower price\nthan daily\naverage: $avgPrice€"
+                                                    : "Careful with exceed\nconsume. Today\naverage is $avgPrice" ,
+                                                      style: GoogleFonts.questrial(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: size.height * 0.02,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.05,
+                                        padding: EdgeInsets.only(
+                                          top: size.height * 0.01,
+                                          left: size.width * 0.06,
+                                        ),
+                                        child: Text(
+                                          'Expected\nexpenditure:',
+                                          style: GoogleFonts.questrial(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: size.height * 0.023,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          child: Align(
-                                            child: Text(
-                                              'min $calcDerecha€\n', // min temperature
-                                              style: GoogleFonts.questrial(
-                                                color: minPrice <= 0
-                                                    ? Colors.blue
-                                                    : minPrice > 0 && minPrice <= 15
-                                                        ? Colors.indigo
-                                                        : minPrice > 15 && minPrice < 30
-                                                            ? Colors.deepPurple
-                                                            : Colors.pink,
-                                                fontSize: size.height * 0.03,
-                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          left: size.width * 0.06,
+                                        ),
+                                        child: Align(
+                                          child: Text(
+                                            '$expectedCost€\n', 
+                                            style: GoogleFonts.questrial(
+                                              color: isDarkMode
+                                                  ? Colors.white54
+                                                  : Colors.black54,
+                                              fontSize: size.height * 0.03,
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: size.width * 0.05,
-                                          ),
-                                          child: Align(
-                                            child: Text(
-                                              'Data type\n\n\n\n\n', // weather
-                                              style: GoogleFonts.questrial(
-                                                color: isDarkMode
-                                                    ? Colors.white54
-                                                    : Colors.black54,
-                                                fontSize: size.height * 0.03,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
+                                      ),
+                                    ]
+                                  ),
                                 ],
                               ),
                             ),
                             //--------------------------------
-      
+
                             // BARRA SCROLL HORIZONTAL PRECIOS X DIA
-      
+
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: size.width * 0.05,
@@ -344,84 +407,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(size.width * 0.005),
+                                      padding:
+                                          EdgeInsets.all(size.width * 0.005),
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
-                                          children: [
-                                            //TODO: change weather forecast from local to api get
-                                            buildForecastToday(
-                                              "0,52", //precio
-                                              "00:00", //hora inicio periodo
-                                              "01:00", //hora fin periodo
-                                              size,
+                                          children: List.generate(24, (index) {
+                                            String price = hourPrices[index]; // Obtener el precio de la lista
+                                            String startTime = "${index.toString().padLeft(2, '0')}:00"; // Hora de inicio
+                                            String endTime = "${(index + 1).toString().padLeft(2, '0')}:00"; // Hora de fin
+                                            return buildHourRange(
+                                              price, 
+                                              startTime, 
+                                              endTime, 
+                                              size, 
                                               isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,36",
-                                              "01:00",
-                                              "02:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,45",
-                                              "02:00",
-                                              "03:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,48",
-                                              "03:00",
-                                              "04:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,56",
-                                              "04:00",
-                                              "05:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,89",
-                                              "05:00",
-                                              "06:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,79",
-                                              "06:00",
-                                              "07:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,68",
-                                              "07:00",
-                                              "08:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,56",
-                                              "08:00",
-                                              "09:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                            buildForecastToday(
-                                              "0,57",
-                                              "09:00",
-                                              "10:00",
-                                              size,
-                                              isDarkMode,
-                                            ),
-                                          ],
-                                        ),
+                                            );
+                                          }),
+                                        )
                                       ),
                                     ),
                                   ],
@@ -462,7 +465,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                     Divider(
-                                      color: isDarkMode ? Colors.white : Colors.black,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                     ),
                                   ],
                                 ),
@@ -482,7 +487,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildForecastToday(
+  Widget buildHourRange(
       String price, String hini, String hfin, size, bool isDarkMode) {
     return Padding(
       padding: EdgeInsets.all(size.width * 0.025),

@@ -7,7 +7,7 @@ from consumo_electricidad import *
 electricity = Electricity_price()
 consume = Electricity_consume()
 
-def funcion_1():
+def basic_data():
     min_max = electricity.get_min_max_price()
     return {"prices": electricity.get_prices_list(),
             "max_price": min_max["max"],
@@ -15,12 +15,12 @@ def funcion_1():
             "avg_price": electricity.avg_price(),
             "consumption_list": consume.hour_consumption_avg()}
 
-def funcion_2():
-    return {"mensaje": "Llamada a la función 2"}
+def carbon_footprint():
+    return {"monthly_carbon_footprint": consume.monthly_carbon_footprint()}
 
 rutas = {
-    "/electricidad": funcion_1,
-    "/funcion2": funcion_2,
+    "/basicdata": basic_data,
+    "/carbonfootprint": carbon_footprint,
 }
 
 

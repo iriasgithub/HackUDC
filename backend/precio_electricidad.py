@@ -13,7 +13,7 @@ class Electricity_price:
         json_price_list = request.json()["PVPC"]
 
         for day in json_price_list:
-            self._prices_list.append(float(day["PCB"].replace(",",".")))
+            self._prices_list.append(round(float(day["PCB"].replace(",",".")) / 1000, 3))
 
     def __get_prices_list__(self) -> list:
         if self._prices_list ==  []:
@@ -33,10 +33,10 @@ class Electricity_price:
             elif hour > max[1]:
                 max = (index, hour)
             index += 1
-        return {"min": {"range":str(min[0]) + " - " + str(min[0]+1), "price": str(min[1])},
-                "max": {"range": str(max[0]) + " - " + str(max[0]+1), "price": str(max[1])}}
+        return {"min": {"range":str(min[0]) + ":00 - " + str(min[0]+1) + ":00" , "price": str(min[1])},
+                "max": {"range": str(max[0]) + ":00 - " + str(max[0]+1) + ":00" , "price": str(max[1])}}
     
     def avg_price(self):
-        return str(sum(self.__get_prices_list__()) / 24)
+        return str(round(sum(self.__get_prices_list__()) / 24, 3))
 
 
