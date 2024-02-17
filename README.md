@@ -40,3 +40,9 @@ Para poner en marcha VoltCare será necesario inicar el servidor Python HTTP med
 python3 server.py
 ```
 Luego se ejecutará la aplicación móvil de Flutter que empezará a enviar peticiones a nuestro servidor.
+
+## Autoría
+Usuarios de GitHub - Correos UDC
+pablodiazcoira - pablo.coira@udc.es
+santiago2699 - s.a.castro.rampersad@udc.es
+iriasgithub - iria.pardo.neira@udc.es
