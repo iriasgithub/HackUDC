@@ -15,6 +15,11 @@ Las principales funcionalidades que nos ofrece la aplicación son las siguientes
 **VoltCare** está disponible para su uso en sistemas operativos Android e IOS.
 ## Multimedia
 
+
+https://github.com/iriasgithub/HackUDC/assets/114592933/6884314a-fe67-4f90-8c2a-427eeb021f25
+
+
+
 ## Tecnologías 
 El desarollo Frontend de VoltCare está exclusivamente desarollado en lenguaje dart, haciendo uso de la librería Flutter. Por otro lado, la parte referida al Backend emplea fundamentalmente Python y la librería Pandas para el análisis de datos.
 ## Backend
