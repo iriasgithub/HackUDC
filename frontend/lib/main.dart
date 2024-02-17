@@ -49,10 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            String cityName = model.maxHourPrice; //city name
-            int currTemp = 30; // current temperature
-            int maxTemp = 30; // today max temperature
-            int minTemp = 2; // today min temperature
+          
+            String voltCare = "VoltCare"; //city name
+            double currPrice = 0.5; // current temperature
+            double maxPrice = 0.86; // today max temperature
+            double minPrice = 0.35; // today min temperature
+            String avgPrice = "0.67"; //precio medio del dia
+            String calcDerecha = "0.56"; 
+            
             Size size = MediaQuery.of(context).size;
             return Center(
               child: Container(
@@ -65,120 +69,36 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Stack(
                     children: [
                       SingleChildScrollView(
+                        //COLUMNA PRINCIPAL
+      
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            //BARRA SUPERIOR
+      
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                vertical: size.height * 0.01,
-                                horizontal: size.width * 0.05,
+                                vertical: size.height * 0.04,
+                                horizontal: size.width * 0.06,
                               ),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.bars,
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                  Align(
-                                    child: Text(
-                                      'VoltCare', //TODO: change app name
-                                      style: GoogleFonts.questrial(
-                                        color: isDarkMode
-                                            ? Colors.white
-                                            : const Color(0xff1D1617),
-                                        fontSize: size.height * 0.02,
-                                      ),
-                                    ),
+                                    color: isDarkMode ? Colors.white : Colors.black,
                                   ),
                                   FaIcon(
                                     FontAwesomeIcons.plusCircle,
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color: isDarkMode ? Colors.white : Colors.black,
                                   ),
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: size.height * 0.03,
-                              ),
-                              child: Align(
-                                child: Text(
-                                  cityName,
-                                  style: GoogleFonts.questrial(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontSize: size.height * 0.06,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: size.height * 0.005,
-                              ),
-                              child: Align(
-                                child: Text(
-                                  'Today', //day
-                                  style: GoogleFonts.questrial(
-                                    color: isDarkMode
-                                        ? Colors.white54
-                                        : Colors.black54,
-                                    fontSize: size.height * 0.035,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: size.height * 0.03,
-                              ),
-                              child: Align(
-                                child: Text(
-                                  '$currTemp˚C', //curent temperature
-                                  style: GoogleFonts.questrial(
-                                    color: currTemp <= 0
-                                        ? Colors.blue
-                                        : currTemp > 0 && currTemp <= 15
-                                            ? Colors.indigo
-                                            : currTemp > 15 && currTemp < 30
-                                                ? Colors.deepPurple
-                                                : Colors.pink,
-                                    fontSize: size.height * 0.13,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: size.width * 0.25),
-                              child: Divider(
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: size.height * 0.005,
-                              ),
-                              child: Align(
-                                child: Text(
-                                  'Sunny', // weather
-                                  style: GoogleFonts.questrial(
-                                    color: isDarkMode
-                                        ? Colors.white54
-                                        : Colors.black54,
-                                    fontSize: size.height * 0.03,
-                                  ),
-                                ),
-                              ),
-                            ),
+      
+                            //--------------------------
+                            //ELEMENTOS BLOQUE GRANDE + DERECHO
+      
                             Padding(
                               padding: EdgeInsets.only(
                                 top: size.height * 0.03,
@@ -187,44 +107,208 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    '$minTemp˚C', // min temperature
-                                    style: GoogleFonts.questrial(
-                                      color: minTemp <= 0
-                                          ? Colors.blue
-                                          : minTemp > 0 && minTemp <= 15
-                                              ? Colors.indigo
-                                              : minTemp > 15 && minTemp < 30
-                                                  ? Colors.deepPurple
-                                                  : Colors.pink,
-                                      fontSize: size.height * 0.03,
-                                    ),
-                                  ),
-                                  Text(
-                                    '/',
-                                    style: GoogleFonts.questrial(
-                                      color: isDarkMode
-                                          ? Colors.white54
-                                          : Colors.black54,
-                                      fontSize: size.height * 0.03,
-                                    ),
-                                  ),
-                                  Text(
-                                    '$maxTemp˚C', //max temperature
-                                    style: GoogleFonts.questrial(
-                                      color: maxTemp <= 0
-                                          ? Colors.blue
-                                          : maxTemp > 0 && maxTemp <= 15
-                                              ? Colors.indigo
-                                              : maxTemp > 15 && maxTemp < 30
-                                                  ? Colors.deepPurple
-                                                  : Colors.pink,
-                                      fontSize: size.height * 0.03,
-                                    ),
-                                  ),
+                                  //elemento izquierda
+                                  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.03,
+                                            left: size.width * 0.08,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              voltCare,
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: size.height * 0.06,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.08,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'Now', //day
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white54
+                                                    : Colors.black54,
+                                                fontSize: size.height * 0.035,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.03,
+                                            left: size.width * 0.08,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              '$currPrice€', //curent price
+                                              style: GoogleFonts.questrial(
+                                                color: currPrice <= 0
+                                                    ? Colors.blue
+                                                    : currPrice > 0 && currPrice <= 15
+                                                        ? Colors.indigo
+                                                        : currPrice > 15 &&
+                                                                currPrice < 30
+                                                            ? Colors.deepPurple
+                                                            : Colors.pink,
+                                                fontSize: size.height * 0.13,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: size.width * 0.25),
+                                          child: Divider(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.005,
+                                            left: size.width * 0.08,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'Average price: $avgPrice€', // precio medio
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white54
+                                                    : Colors.black54,
+                                                fontSize: size.height * 0.03,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: size.height * 0.03,
+                                            bottom: size.height * 0.03,
+                                            left: size.width * 0.08,
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'min $minPrice€', // min temperature
+                                                style: GoogleFonts.questrial(
+                                                  color: minPrice <= 0
+                                                      ? Colors.blue
+                                                      : minPrice > 0 && minPrice <= 15
+                                                          ? Colors.indigo
+                                                          : minPrice > 15 &&
+                                                                  minPrice < 30
+                                                              ? Colors.deepPurple
+                                                              : Colors.pink,
+                                                  fontSize: size.height * 0.03,
+                                                ),
+                                              ),
+                                              Text(
+                                                '/',
+                                                style: GoogleFonts.questrial(
+                                                  color: isDarkMode
+                                                      ? Colors.white54
+                                                      : Colors.black54,
+                                                  fontSize: size.height * 0.03,
+                                                ),
+                                              ),
+                                              Text(
+                                                'max $maxPrice€', //max temperature
+                                                style: GoogleFonts.questrial(
+                                                  color: maxPrice <= 0
+                                                      ? Colors.blue
+                                                      : maxPrice > 0 && maxPrice <= 15
+                                                          ? Colors.indigo
+                                                          : maxPrice > 15 &&
+                                                                  maxPrice < 30
+                                                              ? Colors.deepPurple
+                                                              : Colors.pink,
+                                                  fontSize: size.height * 0.03,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ]),
+                                  //elemento derecha
+                                  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.05,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'Higher than average\nmonthly price', // weather
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white54
+                                                    : Colors.black54,
+                                                fontSize: size.height * 0.03,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.05,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'min $calcDerecha€\n', // min temperature
+                                              style: GoogleFonts.questrial(
+                                                color: minPrice <= 0
+                                                    ? Colors.blue
+                                                    : minPrice > 0 && minPrice <= 15
+                                                        ? Colors.indigo
+                                                        : minPrice > 15 && minPrice < 30
+                                                            ? Colors.deepPurple
+                                                            : Colors.pink,
+                                                fontSize: size.height * 0.03,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: size.width * 0.05,
+                                          ),
+                                          child: Align(
+                                            child: Text(
+                                              'Data type\n\n\n\n\n', // weather
+                                              style: GoogleFonts.questrial(
+                                                color: isDarkMode
+                                                    ? Colors.white54
+                                                    : Colors.black54,
+                                                fontSize: size.height * 0.03,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
                                 ],
                               ),
                             ),
+                            //--------------------------------
+      
+                            // BARRA SCROLL HORIZONTAL PRECIOS X DIA
+      
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: size.width * 0.05,
@@ -248,7 +332,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           left: size.width * 0.03,
                                         ),
                                         child: Text(
-                                          'Forecast for today',
+                                          'Prices for today',
                                           style: GoogleFonts.questrial(
                                             color: isDarkMode
                                                 ? Colors.white
@@ -260,107 +344,125 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding:
-                                          EdgeInsets.all(size.width * 0.005),
+                                      padding: EdgeInsets.all(size.width * 0.005),
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
                                           children: [
                                             //TODO: change weather forecast from local to api get
                                             buildForecastToday(
-                                              "Now", //hour
-                                              currTemp, //temperature
-                                              20, //wind (km/h)
-                                              0, //rain chance (%)
-                                              FontAwesomeIcons
-                                                  .sun, //weather icon
+                                              "0,52", //precio
+                                              "00:00", //hora inicio periodo
+                                              "01:00", //hora fin periodo
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "15:00",
-                                              1,
-                                              10,
-                                              40,
-                                              FontAwesomeIcons.cloud,
+                                              "0,36",
+                                              "01:00",
+                                              "02:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "16:00",
-                                              0,
-                                              25,
-                                              80,
-                                              FontAwesomeIcons.cloudRain,
+                                              "0,45",
+                                              "02:00",
+                                              "03:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "17:00",
-                                              -2,
-                                              28,
-                                              60,
-                                              FontAwesomeIcons.snowflake,
+                                              "0,48",
+                                              "03:00",
+                                              "04:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "18:00",
-                                              -5,
-                                              13,
-                                              40,
-                                              FontAwesomeIcons.cloudMoon,
+                                              "0,56",
+                                              "04:00",
+                                              "05:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "19:00",
-                                              -8,
-                                              9,
-                                              60,
-                                              FontAwesomeIcons.snowflake,
+                                              "0,89",
+                                              "05:00",
+                                              "06:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "20:00",
-                                              -13,
-                                              25,
-                                              50,
-                                              FontAwesomeIcons.snowflake,
+                                              "0,79",
+                                              "06:00",
+                                              "07:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "21:00",
-                                              -14,
-                                              12,
-                                              40,
-                                              FontAwesomeIcons.cloudMoon,
+                                              "0,68",
+                                              "07:00",
+                                              "08:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "22:00",
-                                              -15,
-                                              1,
-                                              30,
-                                              FontAwesomeIcons.moon,
+                                              "0,56",
+                                              "08:00",
+                                              "09:00",
                                               size,
                                               isDarkMode,
                                             ),
                                             buildForecastToday(
-                                              "23:00",
-                                              -15,
-                                              15,
-                                              20,
-                                              FontAwesomeIcons.moon,
+                                              "0,57",
+                                              "09:00",
+                                              "10:00",
                                               size,
                                               isDarkMode,
                                             ),
                                           ],
                                         ),
                                       ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.05,
+                                vertical: size.height * 0.02,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Colors.white.withOpacity(0.05),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          top: size.height * 0.02,
+                                          left: size.width * 0.03,
+                                        ),
+                                        child: Text(
+                                          'Data Information',
+                                          style: GoogleFonts.questrial(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: size.height * 0.025,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: isDarkMode ? Colors.white : Colors.black,
                                     ),
                                   ],
                                 ),
@@ -380,80 +482,38 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildForecastToday(String time, int temp, int wind, int rainChance,
-      IconData weatherIcon, size, bool isDarkMode) {
+  Widget buildForecastToday(
+      String price, String hini, String hfin, size, bool isDarkMode) {
     return Padding(
       padding: EdgeInsets.all(size.width * 0.025),
       child: Column(
         children: [
           Text(
-            time,
-            style: GoogleFonts.questrial(
-              color: isDarkMode ? Colors.white : Colors.black,
-              fontSize: size.height * 0.02,
-            ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.005,
-                ),
-                child: FaIcon(
-                  weatherIcon,
-                  color: isDarkMode ? Colors.white : Colors.black,
-                  size: size.height * 0.03,
-                ),
-              ),
-            ],
-          ),
-          Text(
-            '$temp˚C',
+            '$price€',
             style: GoogleFonts.questrial(
               color: isDarkMode ? Colors.white : Colors.black,
               fontSize: size.height * 0.025,
             ),
           ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.01,
-                ),
-                child: FaIcon(
-                  FontAwesomeIcons.wind,
-                  color: Colors.grey,
-                  size: size.height * 0.03,
-                ),
-              ),
-            ],
-          ),
           Text(
-            '$wind km/h',
+            'kWh',
             style: GoogleFonts.questrial(
               color: Colors.grey,
-              fontSize: size.height * 0.02,
+              fontSize: size.height * 0.023,
             ),
           ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.01,
-                ),
-                child: FaIcon(
-                  FontAwesomeIcons.umbrella,
-                  color: Colors.blue,
-                  size: size.height * 0.03,
-                ),
-              ),
-            ],
+          Text(
+            hini,
+            style: GoogleFonts.questrial(
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontSize: size.height * 0.018,
+            ),
           ),
           Text(
-            '$rainChance %',
+            hfin,
             style: GoogleFonts.questrial(
-              color: Colors.blue,
-              fontSize: size.height * 0.02,
+              color: isDarkMode ? Colors.white : Colors.black,
+              fontSize: size.height * 0.018,
             ),
           ),
         ],
